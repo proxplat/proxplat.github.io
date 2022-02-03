@@ -27,11 +27,6 @@ data = f'''
 
 # push to github
 
-# delete dir
-#os.remove("thescimedia.github.io")
-
-
-
 # change file
 f = open('index.html', "w")
 f.write(data)
