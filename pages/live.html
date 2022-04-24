@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <title>Proxplat</title>
 </head>
 <body>
@@ -27,42 +27,41 @@
     </div>
     <br>
 
-    <button class="button" id="previous" onclick="gitSaveApicall('/v1/trigger/previous');">PREVIOUS</button>
-    <button class="button" id="next" onclick="gitSaveApicall('/v1/trigger/next');">NEXT</button>
-    This is git save
-    <br>
-    <a href="pages/live.html">Live Slide</a>
+
+    <img id="live_slide" width="100%" height="auto" src="https://a.fsdn.com/con/app/proj/testimages/screenshots/img_640x360_3x8bit_RGB_color_SMPTE_RP_219_2002.png/max/max/1">
+    
 </body>
 
 <script>
-
-    function apicall(call) {
+imgSrc = "test";
+    function getimgSrc() {
         const IP = document.getElementById("ip").value;
         const PORT = document.getElementById("port").value;
-        var api = "http://" + IP + ":" + PORT;
-
+        var api = "https://" + IP + ":" + PORT;
         var request = new XMLHttpRequest();
-        request.open('GET', api + call);
+        request.open('GET', api + '/v1/presentation/slide_index');
         request.send();
         request.onload = ()=>{
             try {
-                console.log(JSON.parse(request.response));
-            }
-            catch {
+                data = JSON.parse(request.response);
+                presentationUuid = data['presentation']['presentation_id']['uuid']
+                slide_index = data['presentation']['index']
 
+                var imgSrc = api + "/v1/presentation/" + presentationUuid + "/thumbnail/" + slide_index + '?quality=1920';
+                console.log(imgSrc)
+                document.getElementById("live_slide").src = imgSrc
             }
+            catch {}
+        }
+    }
+    setInterval(getimgSrc,500);
+
+    //document.getElementById("myImg").src = getimgSrc();
         
-        }   
-    }
 
-    function gitSaveApicall(call) {
-        const IP = document.getElementById("ip").value;
-        const PORT = document.getElementById("port").value;
-        var api = "http://" + IP + ":" + PORT + call;
-        window.location = api;
-    }
+        
+        
 
-    
 </script>
 
 
