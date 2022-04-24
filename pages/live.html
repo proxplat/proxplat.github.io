@@ -29,7 +29,8 @@
 
 
     <img id="live_slide" width="100%" height="auto" src="https://a.fsdn.com/con/app/proj/testimages/screenshots/img_640x360_3x8bit_RGB_color_SMPTE_RP_219_2002.png/max/max/1">
-    
+    <br>
+    <a href="../index.html">back</a>
 </body>
 
 <script>
@@ -37,7 +38,7 @@ imgSrc = "test";
     function getimgSrc() {
         const IP = document.getElementById("ip").value;
         const PORT = document.getElementById("port").value;
-        var api = "https://" + IP + ":" + PORT;
+        var api = "http://" + IP + ":" + PORT;
         var request = new XMLHttpRequest();
         request.open('GET', api + '/v1/presentation/slide_index');
         request.send();
