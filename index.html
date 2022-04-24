@@ -4,11 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Refresh" content="0; url='http://95.33.142.126:3000/'" />
-    
-    <title>Wenn du das hier siehst ist diese Website leider offline</title>
+    <link rel="stylesheet" href="css/main.css">
+    <title>Proxplat</title>
 </head>
 <body>
-    You will be relocated to scimedia...
+    <div id="head" class="header">
+            <p class="title">Proxplat<img width="100" height="auto" style="margin-left: 50px;" src="https://renewedvision.com/wp-content/uploads/2019/11/ProPresenter-Logo-WhiteSpace.svg"></p>
+            
+            <p1 class="text">
+                Die Plattform für ProPresenter im Browser
+            </p1>
+        
+        
+
+    </div>
+    <br><br>
+    <div class="top">
+        <label class="text" for="ip">IP:</label>
+        <input class="input" type="text" value="192.168.178.47" placeholder="192.168.0.123" id="ip">
+        <label class="text" for="port">Port:</label>
+        <input class="input" type="text" value="5000" placeholder="5000" id="port">
+    </div>
+    <br>
+
+    <button class="button" id="previous" onclick="apicall('/v1/trigger/previous');">PREVIOUS</button>
+    <button class="button" id="next" onclick="apicall('/v1/trigger/next');">NEXT</button>
+    
 </body>
+
+<script>
+
+    function apicall(call) {
+        const IP = document.getElementById("ip").value;
+        const PORT = document.getElementById("port").value;
+        var api = "http://" + IP + ":" + PORT;
+
+        var request = new XMLHttpRequest();
+        request.open('GET', api + call);
+        request.send();
+        request.onload = ()=>{
+            try {
+                console.log(JSON.parse(request.response));
+            }
+            catch {
+
+            }
+        
+        }   
+    }
+
+    
+</script>
+
+
 </html>
