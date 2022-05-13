@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
     <title>Proxplat</title>
 </head>
 <body>
@@ -16,8 +16,8 @@
             </p1>
 
             <div class="topnav">
-                <a class="active" href="/home">Home</a>
-                <a href="./pages/more.html">Mehr</a>
+                <a href="../index.html">Home</a>
+                <a class="active" href="./pages/more.html">Mehr</a>
                 
         
         </div>
@@ -33,12 +33,21 @@
         <label class="text" for="port">Port:</label>
         <input class="input" type="text" value="49351" placeholder="5000" id="port">
     </div>
-    
+    <h1 class="text">
+        Stage Display
+    </h1>
 
-    <button class="buttonlarge" style="background-color: #4caf57;" id="previous" onclick="gitSaveApicall('/v1/trigger/previous');">ZURÜCK</button>
-    <br>
-    <button class="buttonlarge" id="next" onclick="gitSaveApicall('/v1/trigger/next');">WEITER</button>
-
+    <div class="center">
+        <button class="button center" style="background-color: #4caf57;" id="vollesbild" onclick="gitSaveApicall('/v1/stage/screen/0/layout/10');">Volles Bild</button>
+        <br>
+        <button class="button center" id="lobpreis" onclick="gitSaveApicall('/v1/stage/screen/0/layout/8');">Lobpreis</button>
+        <br><br>
+        <label class="text" for="index">Custom:</label>
+        <input class="input" type="text" placeholder="0" id="index">
+        <br>
+        <button id="check" onclick="gitSaveApicall('/v1/stage/layouts')" class="button" style="width: auto; background-color: pink">get list</button>
+        <button class="button center" style="width: auto; background-color: blueviolet;" id="custom" onclick="customStageDisplay();">Custom</button>
+    </div>
     
 </body>
 
@@ -61,6 +70,12 @@ function apicall(call) {
             }
         
         }   
+    }
+
+    function customStageDisplay() {
+        const index = document.getElementById('index').value;
+        var call = '/v1/stage/screen/0/layout/' + index
+        gitSaveApicall(call)
     }
 
     function gitSaveApicall(call) {
